@@ -17,7 +17,7 @@ Status: **site rebuilt and validated locally; waiting for the Vercel project imp
 
 - **Extraction:** Playwright renders each page as Wix serves it (desktop 1440 px and iPhone UA), scrolls to trigger lazy loading, and saves the hydrated DOM. `tools/convert.py` then deterministically strips every Wix script, downloads media/CSS/fonts, rewrites links and emits static HTML. Nothing was retyped by hand.
   - SingleFile would inline everything into one huge file per page (hard to maintain, no shared assets); HTTrack/wget only see the server HTML, missing the hydrated state and lazy media; Wix has no code/site export for Editor sites. The Playwright + converter route gave identical layouts with shared, cacheable assets.
-- **Site:** plain static HTML (no framework, no build), one 3 KB script (`public/site.js`) replacing the Wix runtime parts used: mobile menu, back-to-top, forms, video players.
+- **Site:** plain static HTML (no framework, no build), one small script (`public/site.js`) replacing the Wix runtime parts used: mobile menu, back-to-top, forms, video players.
 - **Mobile:** Wix serves a separate mobile layout by user agent. `vercel.json` does the same with a header-matched rewrite to `public/m/*` (no JavaScript), tablets get desktop as on Wix.
 - **Forms:** `api/form.js` (Vercel Function, no dependencies) validates server-side (form name, email, URLs, field count/size, same-origin), traps spam with a honeypot + minimum fill time + per-IP rate limit (replacing Wix's reCAPTCHA, so no Google script), sends via Resend with the visitor as Reply-To, stores nothing.
 - **Videos:** the five YouTube players show a click-to-load placeholder; nothing is requested from YouTube before the click, then `youtube-nocookie.com` is embedded (GDPR/TTDSG-friendly).
@@ -55,7 +55,7 @@ Independence from Wix: with every non-local request blocked, **no page requested
 - The Wix entrance animations are not reproduced; the pages show their final state immediately.
 - No reCAPTCHA (replaced by server-side spam protection).
 - **There is no privacy policy (Datenschutzerklärung) on the original site**, though it has three contact forms and YouTube videos. That gap is pre-existing; it should be added (by you or a generator such as e-recht24) before or soon after the switch. I did not write legal text.
-- Wix's built-in cookie banner was not active on the site; with Wix's tracking removed and YouTube behind a click, no consent banner is needed.
+- No cookie banner appeared on the Wix site in any capture; with Wix's tracking removed and YouTube behind a click, no consent banner is needed.
 
 ## 5. Recurring costs
 
