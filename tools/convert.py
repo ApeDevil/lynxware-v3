@@ -143,6 +143,10 @@ IMPRESSUM_ALT = ('Stanislaw Kirpicnikow, Menninghauser Str. 29, 42859 Remscheid,
                  'Email: s.kirpicnikow@gmx.de. Artist: ApeDevil.')
 
 
+# Vercel Web Analytics (cookieless; served from this domain once enabled for the project).
+ANALYTICS = ('<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>'
+             '<script defer src="/_vercel/insights/script.js"></script>')
+
 LEGAL_LINE = ('<nav class="lx-legal" aria-label="Legal"><a href="/impressum">Impressum</a>'
               '<span aria-hidden="true"> · </span><a href="/privacy">Privacy / Datenschutz</a></nav>')
 
@@ -199,7 +203,7 @@ def convert(src_html, mode):
     h = re.sub(r'(<meta\b[^>]*content=")(https://static\.wixstatic\.com[^"]+)(")', lambda m: m.group(1) + ORIGIN + localize(m.group(2)) + m.group(3), h)
     h = re.sub(r'\bhref="([^"]+)"', lambda m: f'href="{internal_link(m.group(1))}"', h)
     h = re.sub(r'(<link\b[^>]*rel="canonical"[^>]*href=")/', lambda m: m.group(1) + ORIGIN + '/', h)
-    h = h.replace('</head>', '<link rel="stylesheet" href="/site.css"><script src="/site.js" defer></script></head>', 1)
+    h = h.replace('</head>', '<link rel="stylesheet" href="/site.css"><script src="/site.js" defer></script>' + ANALYTICS + '</head>', 1)
     h = re.sub(r'<html\b', f'<html data-lx-view="{mode}"', h, count=1)
     h = h.replace('</body>', LEGAL_LINE + '</body>', 1)
     return h

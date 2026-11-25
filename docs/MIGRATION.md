@@ -78,6 +78,7 @@ Verified from the providers' own pages: Vercel is certified under the EU-U.S. Da
 1. Data processing agreement with Vercel (Art. 28 GDPR): Vercel's DPA is offered for Pro/Enterprise; confirm what applies on Hobby, and accept the DPA after the Pro upgrade. Vercel's infrastructure request-log retention is not published for Hobby.
 2. Supervisory authority: LDI NRW, derived from the Remscheid address.
 3. Legal review of the whole text, then remove the draft notice.
+5. Vercel Web Analytics (added 2026-11-25, cookieless, script from the site's own domain): legal review of the legitimate-interest basis and of the conclusion that no § 25 TDDDG consent is needed.
 4. The footer still links "LYNXware Merchandise" (lynxware.shop); check that the shop still exists now that the company is gone.
 
 ## 5. Recurring costs
