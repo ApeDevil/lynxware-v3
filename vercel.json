@@ -16,7 +16,7 @@
           "value": ".*(iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry|BB10|Opera Mini|Mobile Safari|IEMobile|webOS).*"
         }
       ],
-      "destination": "/m/index.html"
+      "destination": "/m/index"
     },
     {
       "source": "/:page(application|contact|diy|downloads|impressum|partnership|tutorials)",
@@ -27,15 +27,15 @@
           "value": ".*(iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry|BB10|Opera Mini|Mobile Safari|IEMobile|webOS).*"
         }
       ],
-      "destination": "/m/:page.html"
+      "destination": "/m/:page"
     },
     {
       "source": "/",
-      "destination": "/d/index.html"
+      "destination": "/d/index"
     },
     {
       "source": "/:page(application|contact|diy|downloads|impressum|partnership|tutorials)",
-      "destination": "/d/:page.html"
+      "destination": "/d/:page"
     }
   ],
   "redirects": [

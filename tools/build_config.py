@@ -15,10 +15,10 @@ cfg = {
     # Pages live in public/d (desktop) and public/m (mobile), not at the URL paths themselves:
     # Vercel serves a matching file before it looks at rewrites, so the user-agent rule would never run.
     'rewrites': [
-        {'source': '/', 'has': has, 'destination': '/m/index.html'},
-        {'source': f"/:page({'|'.join(slugs)})", 'has': has, 'destination': '/m/:page.html'},
-        {'source': '/', 'destination': '/d/index.html'},
-        {'source': f"/:page({'|'.join(slugs)})", 'destination': '/d/:page.html'},
+        {'source': '/', 'has': has, 'destination': '/m/index'},
+        {'source': f"/:page({'|'.join(slugs)})", 'has': has, 'destination': '/m/:page'},
+        {'source': '/', 'destination': '/d/index'},
+        {'source': f"/:page({'|'.join(slugs)})", 'destination': '/d/:page'},
     ],
     'redirects': [
         {'source': '/index', 'destination': '/', 'permanent': True},
