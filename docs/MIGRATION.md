@@ -1,6 +1,8 @@
 # LYNXware v3: Wix → Vercel migration report
 
-Status: **deployed on Vercel Hobby at https://lynxware-v3.vercel.app and validated live.** Form delivery waits for the Resend variables; Wix and DNS are untouched.
+Status: **live on https://www.lynxware.org from Vercel (Hobby) since 2026-11-25, validated on the production domain.** Form delivery waits for the Resend variables. Wix is still subscribed (rollback possible) until the cancellation step.
+
+DNS switched at Namecheap on 2026-11-25: `A @` 185.230.63.107/.171/.186 → `216.150.1.1`; `CNAME www` `cdn1.wixdns.net` → `3cf2b555e36ab3a7.vercel-dns-016.com`. MX (email forwarding), SPF TXT and the `v4` CNAME verified unchanged. Let's Encrypt certificate for www.lynxware.org issued (valid to 2027-02-23); `lynxware.org/*` redirects 308 to `https://www.lynxware.org/*`. On the production domain: both layouts by device, the browser checks, 25/25 internal links, 11/11 downloads byte-identical, no external requests or errors.
 
 ## 1. Infrastructure found
 
