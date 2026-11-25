@@ -28,3 +28,6 @@
 .lx-legal { position: relative; z-index: 1; background: #000; padding: 12px 16px 20px; text-align: center; font: 13px/1.6 Helvetica, Arial, sans-serif; color: #999; }
 .lx-legal a { color: #ccc; text-decoration: underline; }
 .lx-legal a:hover { color: #fff; }
+
+/* Contact page: the contact form (left out of v3) sized this section; let it fit what remains. */
+[data-mesh-id=comp-lc8y13sfinlineContent-gridContainer] { min-height: 0 !important; }
