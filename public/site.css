@@ -1,0 +1,30 @@
+/* Added on top of the captured Wix CSS. */
+
+/* Font substitutes. Wix licenses Helvetica, Avenir and Futura for Wix-hosted sites only, so the
+   same family names now point to the visitor's own Helvetica/Arial or to free (SIL OFL) fonts
+   served from /fonts. Work Sans (OFL) is self-hosted by the captured CSS itself. */
+@font-face { font-family: 'helvetica-w01-roman'; src: local('Helvetica Neue'), local('HelveticaNeue'), local('Helvetica'), local('Arial'), local('Liberation Sans'); font-weight: 100 900; }
+@font-face { font-family: 'helvetica-w02-roman'; src: local('Helvetica Neue'), local('HelveticaNeue'), local('Helvetica'), local('Arial'), local('Liberation Sans'); font-weight: 100 900; }
+@font-face { font-family: 'helvetica-lt-w10-roman'; src: local('Helvetica Neue'), local('HelveticaNeue'), local('Helvetica'), local('Arial'), local('Liberation Sans'); font-weight: 100 900; }
+@font-face { font-family: 'helvetica-w01-light'; src: local('Helvetica Neue Light'), local('HelveticaNeue-Light'), local('Helvetica Light'), local('Helvetica-Light'), local('Arial'), local('Liberation Sans'); font-weight: 100 900; }
+@font-face { font-family: 'helvetica-w02-light'; src: local('Helvetica Neue Light'), local('HelveticaNeue-Light'), local('Helvetica Light'), local('Helvetica-Light'), local('Arial'), local('Liberation Sans'); font-weight: 100 900; }
+@font-face { font-family: 'helvetica-bold'; src: local('Helvetica Neue Bold'), local('HelveticaNeue-Bold'), local('Helvetica Bold'), local('Helvetica-Bold'), local('Arial Bold'), local('Arial-BoldMT'); font-weight: 100 900; }
+@font-face { font-family: 'HelveticaNeueW01-45Ligh'; src: local('Helvetica Neue Light'), local('HelveticaNeue-Light'), local('Arial'); font-weight: 100 900; }
+@font-face { font-family: 'avenir-lt-w01_35-light1475496'; src: local('Avenir Light'), local('Avenir-Light'), url('/fonts/nunito-sans.woff2') format('woff2'); font-weight: 300; size-adjust: 100%; font-display: swap; }
+@font-face { font-family: 'avenir-lt-w01_85-heavy1475544'; src: local('Avenir Heavy'), local('Avenir-Heavy'), url('/fonts/nunito-sans.woff2') format('woff2'); font-weight: 800; size-adjust: 100%; font-display: swap; }
+@font-face { font-family: 'futura-lt-w01-book'; src: local('Futura'), local('Futura-Medium'), url('/fonts/jost.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'futura-lt-w05-book'; src: local('Futura'), local('Futura-Medium'), url('/fonts/jost.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
+/* Click-to-load YouTube player, filling the box of the Wix player it replaces. */
+.lx-video { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: #000; color: #ccc; font: 13px/1.4 Helvetica, Arial, sans-serif; text-align: center; padding: 12px; box-sizing: border-box; }
+.lx-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.lx-video__play { background: none; border: 0; padding: 0; cursor: pointer; }
+.lx-video__play:hover { opacity: .85; }
+.lx-video__play:focus-visible { outline: 2px solid #3899ec; outline-offset: 4px; }
+.lx-video__note { margin: 0; max-width: 420px; }
+.lx-video__note a { color: #fff; text-decoration: underline; }
+
+/* Forms: spam trap stays invisible to people; status line under the button. */
+.lx-hp { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; opacity: 0; }
+.lx-form-status { position: relative; margin: 8px 0 0; color: #fff; font: 14px/1.4 Helvetica, Arial, sans-serif; grid-area: 1 / 1 / 2 / 2; align-self: end; }
+.lx-form-status:empty { display: none; }
