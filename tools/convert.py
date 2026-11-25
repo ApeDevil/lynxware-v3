@@ -147,6 +147,10 @@ IMPRESSUM_ALT = ('Stanislaw Kirpicnikow, Menninghauser Str. 29, 42859 Remscheid,
 ANALYTICS = ('<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>'
              '<script defer src="/_vercel/insights/script.js"></script>')
 
+# Announcement bar above the Wix header on every page.
+V4_NOTICE = ('<div class="lx-notice" role="note">LYNXware v4 is coming in early 2027. '
+             '<a href="https://v4.lynxware.org">Take a look at v4.lynxware.org</a></div>')
+
 LEGAL_LINE = ('<nav class="lx-legal" aria-label="Legal"><a href="/impressum">Impressum</a>'
               '<span aria-hidden="true"> · </span><a href="/privacy">Privacy / Datenschutz</a></nav>')
 
@@ -206,6 +210,7 @@ def convert(src_html, mode):
     h = h.replace('</head>', '<link rel="stylesheet" href="/site.css"><script src="/site.js" defer></script>' + ANALYTICS + '</head>', 1)
     h = re.sub(r'<html\b', f'<html data-lx-view="{mode}"', h, count=1)
     h = h.replace('</body>', LEGAL_LINE + '</body>', 1)
+    h = re.sub(r'(<body\b[^>]*>)', lambda m: m.group(1) + V4_NOTICE, h, count=1)
     return h
 
 

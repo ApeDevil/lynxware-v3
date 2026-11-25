@@ -31,3 +31,8 @@
 
 /* Contact page: the contact form (left out of v3) sized this section; let it fit what remains. */
 [data-mesh-id=comp-lc8y13sfinlineContent-gridContainer] { min-height: 0 !important; }
+
+/* Announcement bar above the header. */
+.lx-notice { position: relative; z-index: 60; background: #00c3cf; color: #000; text-align: center; padding: 6px 12px; font: 14px/1.4 Helvetica, Arial, sans-serif; }
+.lx-notice a { color: #000; font-weight: bold; text-decoration: underline; }
+html[data-lx-view="mobile"] .lx-notice { font-size: 12px; padding: 5px 8px; }
