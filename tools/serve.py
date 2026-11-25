@@ -2,7 +2,7 @@
 """Local stand-in for Vercel's routing (cleanUrls + mobile user-agent rewrite) for tests: serve.py <public> <port>"""
 import http.server, os, re, sys, functools
 ROOT, PORT = sys.argv[1], int(sys.argv[2])
-MOBILE = re.compile(r'iphone|ipod|android.*mobile|windows phone|blackberry|bb10|opera mini|mobile safari|iemobile|webos', re.I)
+MOBILE = re.compile(r'iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry|BB10|Opera Mini|Mobile Safari|IEMobile|webOS')
 class H(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a): pass
     def translate_path(self, path):

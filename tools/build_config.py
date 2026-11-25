@@ -5,7 +5,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 pages = [u.strip() for u in open(os.path.join(ROOT, 'tools/pages.txt')) if u.strip()]
 slugs = sorted(urllib.parse.urlparse(u).path.strip('/') for u in pages if urllib.parse.urlparse(u).path.strip('/'))
 # Wix serves a separate mobile layout by user agent; so does this site (tablets get desktop, as on Wix).
-MOBILE = '(?i).*(iphone|ipod|android.*mobile|windows phone|blackberry|bb10|opera mini|mobile safari|iemobile|webos).*'
+# Case-sensitive on purpose: Vercel's header matching does not take an inline (?i) flag.
+MOBILE = '.*(iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry|BB10|Opera Mini|Mobile Safari|IEMobile|webOS).*'
 has = [{'type': 'header', 'key': 'user-agent', 'value': MOBILE}]
 cfg = {
     '$schema': 'https://openapi.vercel.sh/vercel.json',
