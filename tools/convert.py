@@ -135,7 +135,22 @@ def video_facade(m):
             '</div></div>')
 
 
+# Content that must differ from Wix. The former company no longer exists: the Impressum is the
+# operator's personal one, the same card as v4.lynxware.org (public/impressum.svg).
+IMPRESSUM_ALT = ('Stanislaw Kirpicnikow, Menninghauser Str. 29, 42859 Remscheid, Germany. '
+                 'Email: s.kirpicnikow@gmx.de. Artist: ApeDevil.')
+
+
+def override_content(h):
+    return re.sub(r'<img\b[^>]*id="img_comp-lihrgu2l"[^>]*>',
+                  lambda m: re.sub(r'\s(?:srcset|sizes|fetchpriority)="[^"]*"', '', m.group(0))
+                  .replace(re.search(r'src="[^"]*"', m.group(0)).group(0), 'src="/impressum.svg"')
+                  .replace(re.search(r'alt="[^"]*"', m.group(0)).group(0), f'alt="{IMPRESSUM_ALT}"')
+                  .replace('object-fit:cover', 'object-fit:contain'), h)
+
+
 def convert(src_html, mode):
+    src_html = override_content(src_html)
     h = src_html
     h = re.sub(r'<script\b[^>]*>.*?</script>', '', h, flags=re.S | re.I)
     h = re.sub(r'<noscript\b[^>]*>.*?</noscript>', '', h, flags=re.S | re.I)

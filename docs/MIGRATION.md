@@ -51,6 +51,7 @@ Independence from Wix: with every non-local request blocked, **no page requested
 
 ## 4. Remaining discrepancies and limitations
 
+- **Intended content change:** the former company no longer exists, so the Impressum image (company, register and VAT data) is replaced by the personal Impressum of v4.lynxware.org (`public/impressum.svg`, applied by `tools/convert.py`). The old image was removed from the site and the media archive.
 - Fonts differ slightly for visitors without Helvetica/Avenir/Futura installed (see above). Apple devices have Helvetica and Avenir, so they see the original faces.
 - The Wix entrance animations are not reproduced; the pages show their final state immediately.
 - No reCAPTCHA (replaced by server-side spam protection).
@@ -62,7 +63,7 @@ Independence from Wix: with every non-local request blocked, **no page requested
 | Item | Before | After |
 |---|---|---|
 | Wix Premium plan | yes | **cancelled after cutover** |
-| Vercel | existing team | $0 on Hobby (100 GB/month traffic, function calls far below limits). Note: Vercel's Hobby plan is for non-commercial use; if LYNXware UG counts as commercial, Pro is $20/month per member. |
+| Vercel | existing team (Hobby) | Pro, $20/month per member, upgraded once Wix is cancelled (decided by Stas) |
 | Resend | existing account | $0 (free tier: 3,000 emails/month) |
 | Domain (Namecheap) | annual renewal | unchanged |
 | GitHub | private repo | $0 |
@@ -81,6 +82,7 @@ Switch:
 5. Wait until Vercel shows both domains "Valid Configuration" and has issued certificates; open https://www.lynxware.org and https://lynxware.org, submit one test form.
 6. Wix → Settings → Domains: disconnect lynxware.org (stops Wix answering for it).
 7. After about a week without issues: cancel the Wix Premium plan (Wix → Subscriptions). The free Wix site can stay as a cold backup.
+8. Upgrade the Vercel team to Pro.
 
 ## 7. Export from Wix before cancelling
 
