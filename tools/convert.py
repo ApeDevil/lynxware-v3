@@ -171,6 +171,9 @@ def override_content(h):
     for el_id in REMOVED_IDS:
         h = remove_element(h, el_id)
     h = re.sub(r'<li\b[^>]*>(?:(?!</li>).)*href="https://www\.lynxware\.org/(?:application|partnership)"(?:(?!</li>).)*</li>', '', h, flags=re.S)
+    # DIY: the "please visit the Join the Team page" paragraph and the spacer line above it.
+    h = re.sub(r'(?:<p\b[^>]*>\s*<span[^>]*>​</span>\s*</p>\s*)?<p\b[^>]*>(?:(?!</p>).)*'
+               r'If you are interested in being a part of the LYNXproject(?:(?!</p>).)*</p>', '', h, flags=re.S)
     return re.sub(r'<img\b[^>]*id="img_comp-lihrgu2l"[^>]*>',
                   lambda m: re.sub(r'\s(?:srcset|sizes|fetchpriority)="[^"]*"', '', m.group(0))
                   .replace(re.search(r'src="[^"]*"', m.group(0)).group(0), 'src="/impressum.svg"')

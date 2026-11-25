@@ -6,7 +6,7 @@ DNS switched at Namecheap on 2026-11-25: `A @` 185.230.63.107/.171/.186 → `216
 
 ## Scope change (2026-11-25, decided by Stas)
 
-v3 is kept as simple as possible: the "Join the team" and "Partnership" pages, their menu entries and homepage buttons, and the contact form were dropped (they return with v4); `/application` and `/partnership` redirect (302) to `/`. With no forms left, the site has no server code and no Resend; the form function, its tests and the form section of the privacy policy were removed. Sections below that mention forms or Resend describe the earlier state. One sentence on /diy still points to "the Join the Team page"; its link now lands on the homepage.
+v3 is kept as simple as possible: the "Join the team" and "Partnership" pages, their menu entries and homepage buttons, and the contact form were dropped (they return with v4); `/application` and `/partnership` redirect (302) to `/`. With no forms left, the site has no server code and no Resend; the form function, its tests and the form section of the privacy policy were removed. Sections below that mention forms or Resend describe the earlier state. The /diy sentence pointing to the Join the Team page was removed as well.
 
 ## 1. Infrastructure found
 
