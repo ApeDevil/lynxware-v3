@@ -79,7 +79,7 @@ Verified from the providers' own pages: Vercel is certified under the EU-U.S. Da
 2. Supervisory authority: LDI NRW, derived from the Remscheid address.
 3. Legal review of the whole text, then remove the draft notice.
 5. Vercel Web Analytics (added 2026-11-25, cookieless, script from the site's own domain): legal review of the legitimate-interest basis and of the conclusion that no § 25 TDDDG consent is needed.
-4. The footer still links "LYNXware Merchandise" (lynxware.shop); check that the shop still exists now that the company is gone.
+4. Done: the "LYNXware Merchandise" footer button (lynxware.shop, which no longer exists) was removed from every page.
 
 ## 5. Recurring costs
 

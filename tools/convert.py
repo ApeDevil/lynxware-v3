@@ -157,7 +157,8 @@ LEGAL_LINE = ('<nav class="lx-legal" aria-label="Legal"><a href="/impressum">Imp
 
 # Left out of v3 on purpose (they return with v4): the "Join the team" and "Partnership" pages with
 # their header buttons, mobile menu entries and homepage buttons, and the contact form (v3 sends no email).
-REMOVED_IDS = ('comp-leq1klmh', 'comp-lcxrz3xk', 'comp-lmanctyl', 'comp-lmand3wl', 'comp-lrsyfamv')
+# Also the footer "LYNXware Merchandise" button: lynxware.shop no longer exists.
+REMOVED_IDS = ('comp-leq1klmh', 'comp-lcxrz3xk', 'comp-lmanctyl', 'comp-lmand3wl', 'comp-lrsyfamv', 'comp-lhnpiwym')
 
 
 def remove_element(h, el_id):
