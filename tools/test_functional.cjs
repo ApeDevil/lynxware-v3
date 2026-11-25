@@ -19,7 +19,7 @@ const check = async (name, fn) => { try { await fn(); results.push(['PASS', name
     await p.click('#MENU_AS_CONTAINER_TOGGLE'); await p.waitForTimeout(600);
     assert.equal(await p.isVisible('#MENU_AS_CONTAINER'), true);
     const links = await p.$$eval('#MENU_AS_CONTAINER a', as => as.map(a => a.getAttribute('href')));
-    for (const s of ['/diy', '/tutorials', '/downloads', '/contact', '/application', '/partnership']) assert(links.includes(s), 'menu lacks ' + s + ' in ' + links);
+    for (const s of ['/diy', '/tutorials', '/downloads', '/contact']) assert(links.includes(s), 'menu lacks ' + s + ' in ' + links);
     await p.click('#MENU_AS_CONTAINER_TOGGLE'); await p.waitForTimeout(600);
     assert.equal(await p.isVisible('#MENU_AS_CONTAINER'), false);
     await p.screenshot({ path: '/home/user/work/peek/menu_new.png' });
@@ -38,29 +38,10 @@ const check = async (name, fn) => { try { await fn(); results.push(['PASS', name
     assert.equal(yt.filter(u => !u.includes('youtube-nocookie.com/embed')).length, 0, 'non-embed YouTube requests: ' + yt);
     assert(src.startsWith('https://www.youtube-nocookie.com/embed/'), src);
   });
-  for (const [path, mode] of [['/contact', 'desktop'], ['/application', 'desktop'], ['/partnership', 'mobile']]) {
-    await check(`form ${path} (${mode}) posts all fields and shows its success message`, async () => {
-      const p = await (mode === 'mobile' ? mob : desk).newPage(); let payload;
-      await p.route('**/api/form', async r => { payload = JSON.parse(r.request().postData()); await r.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }); });
-      await p.goto(base + path); await p.waitForTimeout(2600);
-      const form = p.locator('form').first();
-      for (const el of await form.locator('input:not(.lx-hp), textarea').all()) {
-        const t = await el.getAttribute('type');
-        await el.fill(t === 'email' ? 'test@example.com' : t === 'url' ? 'https://example.com' : 'Test value');
-      }
-      const sel = form.locator('select'); if (await sel.count()) await sel.selectOption({ index: 1 });
-      await form.locator('button').click(); await p.waitForTimeout(800);
-      assert(payload, 'no request sent');
-      assert(['Contact', 'Application', 'Partnership Request'].includes(payload.form), 'form title ' + payload.form);
-      assert(payload.fields.some(f => f.type === 'email' && f.value === 'test@example.com'));
-      assert.equal(payload.company_website, '');
-      const success = form.locator('[data-testid="richTextElement"]').last();
-      assert.equal(await success.evaluate(e => getComputedStyle(e).visibility), 'visible');
-    });
-  }
-  await check('required fields block an empty submit', async () => {
-    const p = await desk.newPage(); let sent = false; await p.route('**/api/form', r => { sent = true; r.abort(); });
-    await p.goto(base + '/partnership'); await p.locator('form button').click(); await p.waitForTimeout(300); assert.equal(sent, false);
+  await check('no forms left, removed pages redirect to home', async () => {
+    const p = await desk.newPage(); await p.goto(base + '/contact');
+    assert.equal(await p.locator('form').count(), 0);
+    for (const path of ['/application', '/partnership']) { const r = await p.goto(base + path); assert.equal(new URL(r.url()).pathname, '/', path); }
   });
   await check('all 11 downloads respond and match link count', async () => {
     const p = await desk.newPage(); await p.goto(base + '/downloads');
@@ -70,7 +51,7 @@ const check = async (name, fn) => { try { await fn(); results.push(['PASS', name
   });
   await check('every internal link resolves (desktop + mobile pages)', async () => {
     const p = await desk.newPage(); const seen = new Set();
-    for (const s of ['/', '/diy', '/tutorials', '/downloads', '/contact', '/application', '/partnership', '/impressum']) {
+    for (const s of ['/', '/diy', '/tutorials', '/downloads', '/contact', '/impressum', '/privacy']) {
       for (const ctx of [desk, mob]) { const q = await ctx.newPage(); await q.goto(base + s);
         for (const h of await q.$$eval('a[href^="/"]', as => as.map(a => a.getAttribute('href').split('#')[0]))) seen.add(h); await q.close(); }
     }

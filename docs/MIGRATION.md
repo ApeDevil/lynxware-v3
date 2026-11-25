@@ -1,8 +1,12 @@
 # LYNXware v3: Wix → Vercel migration report
 
-Status: **live on https://www.lynxware.org from Vercel (Hobby) since 2026-11-25, validated on the production domain.** Form delivery waits for the Resend variables. Wix is still subscribed (rollback possible) until the cancellation step.
+Status: **live on https://www.lynxware.org from Vercel (Hobby) since 2026-11-25, validated on the production domain.** Wix is still subscribed (rollback possible) until the cancellation step.
 
 DNS switched at Namecheap on 2026-11-25: `A @` 185.230.63.107/.171/.186 → `216.150.1.1`; `CNAME www` `cdn1.wixdns.net` → `3cf2b555e36ab3a7.vercel-dns-016.com`. MX (email forwarding), SPF TXT and the `v4` CNAME verified unchanged. Let's Encrypt certificate for www.lynxware.org issued (valid to 2027-02-23); `lynxware.org/*` redirects 308 to `https://www.lynxware.org/*`. On the production domain: both layouts by device, the browser checks, 25/25 internal links, 11/11 downloads byte-identical, no external requests or errors.
+
+## Scope change (2026-11-25, decided by Stas)
+
+v3 is kept as simple as possible: the "Join the team" and "Partnership" pages, their menu entries and homepage buttons, and the contact form were dropped (they return with v4); `/application` and `/partnership` redirect (302) to `/`. With no forms left, the site has no server code and no Resend; the form function, its tests and the form section of the privacy policy were removed. Sections below that mention forms or Resend describe the earlier state. One sentence on /diy still points to "the Join the Team page"; its link now lands on the homepage.
 
 ## 1. Infrastructure found
 
@@ -72,11 +76,9 @@ Independence from Wix: with every non-local request blocked, **no page requested
 Verified from the providers' own pages: Vercel is certified under the EU-U.S. Data Privacy Framework; Vercel keeps function runtime logs about one hour on Hobby; Resend keeps emails and logs 30 days on its free plan, stores data in the USA, and covers transfers with the DPF and Standard Contractual Clauses; YouTube's privacy-enhanced mode is provided by Google Ireland.
 
 1. Data processing agreement with Vercel (Art. 28 GDPR): Vercel's DPA is offered for Pro/Enterprise; confirm what applies on Hobby, and accept the DPA after the Pro upgrade. Vercel's infrastructure request-log retention is not published for Hobby.
-2. Accept Resend's DPA for the account used (resend.com/legal/dpa).
-3. Which mailbox receives the form emails (`FORM_TO`) and its provider (e.g. Gmail = Google), and how long form emails are kept there.
-4. Supervisory authority: LDI NRW, derived from the Remscheid address.
-5. Legal review of the whole text, then remove the draft notice.
-6. The footer still links "LYNXware Merchandise" (lynxware.shop); check that the shop still exists now that the company is gone.
+2. Supervisory authority: LDI NRW, derived from the Remscheid address.
+3. Legal review of the whole text, then remove the draft notice.
+4. The footer still links "LYNXware Merchandise" (lynxware.shop); check that the shop still exists now that the company is gone.
 
 ## 5. Recurring costs
 
@@ -84,7 +86,6 @@ Verified from the providers' own pages: Vercel is certified under the EU-U.S. Da
 |---|---|---|
 | Wix Premium plan | yes | **cancelled after cutover** |
 | Vercel | existing team (Hobby; LYNXware is a personal, non-commercial project) | Pro, $20/month per member, upgraded once Wix is cancelled (decided by Stas) |
-| Resend | existing account | $0 (free tier: 3,000 emails/month) |
 | Domain (Namecheap) | annual renewal | unchanged |
 | GitHub | private repo | $0 |
 

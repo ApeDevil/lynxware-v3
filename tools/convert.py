@@ -147,7 +147,30 @@ LEGAL_LINE = ('<nav class="lx-legal" aria-label="Legal"><a href="/impressum">Imp
               '<span aria-hidden="true"> · </span><a href="/privacy">Privacy / Datenschutz</a></nav>')
 
 
+# Left out of v3 on purpose (they return with v4): the "Join the team" and "Partnership" pages with
+# their header buttons, mobile menu entries and homepage buttons, and the contact form (v3 sends no email).
+REMOVED_IDS = ('comp-leq1klmh', 'comp-lcxrz3xk', 'comp-lmanctyl', 'comp-lmand3wl', 'comp-lrsyfant1')
+
+
+def remove_element(h, el_id):
+    """Remove the element with this id, including everything nested in it."""
+    m = re.search(r'<(\w+)\b[^>]*\bid="' + re.escape(el_id) + r'"', h)
+    if not m:
+        return h
+    tag, depth, pos = m.group(1), 0, m.start()
+    for t in re.finditer(r'<(/?)' + tag + r'\b[^>]*?(/?)>', h[pos:]):
+        if t.group(2):
+            continue
+        depth += -1 if t.group(1) else 1
+        if depth == 0:
+            return h[:pos] + h[pos + t.end():]
+    raise ValueError(f'unbalanced <{tag}> for {el_id}')
+
+
 def override_content(h):
+    for el_id in REMOVED_IDS:
+        h = remove_element(h, el_id)
+    h = re.sub(r'<li\b[^>]*>(?:(?!</li>).)*href="https://www\.lynxware\.org/(?:application|partnership)"(?:(?!</li>).)*</li>', '', h, flags=re.S)
     return re.sub(r'<img\b[^>]*id="img_comp-lihrgu2l"[^>]*>',
                   lambda m: re.sub(r'\s(?:srcset|sizes|fetchpriority)="[^"]*"', '', m.group(0))
                   .replace(re.search(r'src="[^"]*"', m.group(0)).group(0), 'src="/impressum.svg"')

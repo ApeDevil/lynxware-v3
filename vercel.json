@@ -19,7 +19,7 @@
       "destination": "/m/index"
     },
     {
-      "source": "/:page(application|contact|diy|downloads|impressum|partnership|tutorials)",
+      "source": "/:page(contact|diy|downloads|impressum|tutorials)",
       "has": [
         {
           "type": "header",
@@ -34,7 +34,7 @@
       "destination": "/d/index"
     },
     {
-      "source": "/:page(application|contact|diy|downloads|impressum|partnership|tutorials)",
+      "source": "/:page(contact|diy|downloads|impressum|tutorials)",
       "destination": "/d/:page"
     }
   ],
@@ -48,11 +48,16 @@
       "source": "/datenschutz",
       "destination": "/privacy",
       "permanent": true
+    },
+    {
+      "source": "/:page(application|partnership)",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "headers": [
     {
-      "source": "/((?!assets/|fonts/|_files/|api/).*)",
+      "source": "/((?!assets/|fonts/|_files/).*)",
       "headers": [
         {
           "key": "Vary",

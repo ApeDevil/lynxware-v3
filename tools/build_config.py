@@ -23,9 +23,11 @@ cfg = {
     'redirects': [
         {'source': '/index', 'destination': '/', 'permanent': True},
         {'source': '/datenschutz', 'destination': '/privacy', 'permanent': True},
+        # Not part of v3; these pages return with v4, so the redirect is temporary.
+        {'source': '/:page(application|partnership)', 'destination': '/', 'permanent': False},
     ],
     'headers': [
-        {'source': '/((?!assets/|fonts/|_files/|api/).*)', 'headers': [
+        {'source': '/((?!assets/|fonts/|_files/).*)', 'headers': [
             {'key': 'Vary', 'value': 'User-Agent'},
             {'key': 'X-Content-Type-Options', 'value': 'nosniff'},
             {'key': 'Referrer-Policy', 'value': 'strict-origin-when-cross-origin'},
