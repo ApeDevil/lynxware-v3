@@ -184,7 +184,7 @@ for mode in ('desktop', 'mobile'):
     for fn in sorted(os.listdir(d)):
         if not fn.endswith('.html'):
             continue
-        out_dir = OUT if mode == 'desktop' else os.path.join(OUT, 'm')
+        out_dir = os.path.join(OUT, 'd' if mode == 'desktop' else 'm')
         os.makedirs(out_dir, exist_ok=True)
         res = convert(open(os.path.join(d, fn), encoding='utf-8').read(), mode)
         open(os.path.join(out_dir, fn), 'w', encoding='utf-8').write(res)

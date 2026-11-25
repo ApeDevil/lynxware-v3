@@ -12,14 +12,17 @@ cfg = {
     '$schema': 'https://openapi.vercel.sh/vercel.json',
     'framework': None, 'buildCommand': None, 'installCommand': '', 'outputDirectory': 'public',
     'cleanUrls': True, 'trailingSlash': False,
+    # Pages live in public/d (desktop) and public/m (mobile), not at the URL paths themselves:
+    # Vercel serves a matching file before it looks at rewrites, so the user-agent rule would never run.
     'rewrites': [
         {'source': '/', 'has': has, 'destination': '/m/index.html'},
         {'source': f"/:page({'|'.join(slugs)})", 'has': has, 'destination': '/m/:page.html'},
+        {'source': '/', 'destination': '/d/index.html'},
+        {'source': f"/:page({'|'.join(slugs)})", 'destination': '/d/:page.html'},
     ],
     'redirects': [
         {'source': '/index', 'destination': '/', 'permanent': True},
         {'source': '/datenschutz', 'destination': '/privacy', 'permanent': True},
-        {'source': '/m/:path*', 'destination': '/:path*', 'permanent': False, 'missing': has},
     ],
     'headers': [
         {'source': '/((?!assets/|fonts/|_files/|api/).*)', 'headers': [
@@ -45,5 +48,5 @@ with open(os.path.join(ROOT, 'public/sitemap.xml'), 'w') as f:
     for s in [''] + slugs + ['privacy']:
         f.write(f'<url><loc>https://www.lynxware.org/{s}</loc></url>\n'.replace('.org/<', '.org<') if not s else f'<url><loc>https://www.lynxware.org/{s}</loc></url>\n')
     f.write('</urlset>\n')
-open(os.path.join(ROOT, 'public/robots.txt'), 'w').write('User-agent: *\nAllow: /\nDisallow: /m/\n\nSitemap: https://www.lynxware.org/sitemap.xml\n')
+open(os.path.join(ROOT, 'public/robots.txt'), 'w').write('User-agent: *\nAllow: /\nDisallow: /m/\nDisallow: /d/\n\nSitemap: https://www.lynxware.org/sitemap.xml\n')
 print('ok', slugs)

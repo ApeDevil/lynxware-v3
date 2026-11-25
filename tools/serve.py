@@ -9,8 +9,8 @@ class H(http.server.SimpleHTTPRequestHandler):
         p = path.split('?')[0].split('#')[0]
         mob = bool(MOBILE.search(self.headers.get('User-Agent', '')))
         slug = p.strip('/') or 'index'
-        if '/' not in slug and os.path.exists(os.path.join(ROOT, slug + '.html')):
-            return os.path.join(ROOT, ('m/' if mob else '') + slug + '.html')
+        if '/' not in slug and os.path.exists(os.path.join(ROOT, 'd', slug + '.html')):
+            return os.path.join(ROOT, ('m/' if mob else 'd/') + slug + '.html')
         return super().translate_path(path)
     def send_error(self, code, *a, **k):
         if code == 404:

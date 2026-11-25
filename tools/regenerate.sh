@@ -5,6 +5,6 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 CAP=${CAPTURE_DIR:-$(mktemp -d)}
 node tools/capture.cjs "$CAP" $(cat tools/pages.txt)
-rm -rf public/assets public/m
+rm -rf public/assets public/m public/d
 python3 -I tools/convert.py "$CAP" public tools/videos.txt
 python3 -I tools/build_config.py

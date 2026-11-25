@@ -28,6 +28,14 @@
         }
       ],
       "destination": "/m/:page.html"
+    },
+    {
+      "source": "/",
+      "destination": "/d/index.html"
+    },
+    {
+      "source": "/:page(application|contact|diy|downloads|impressum|partnership|tutorials)",
+      "destination": "/d/:page.html"
     }
   ],
   "redirects": [
@@ -40,18 +48,6 @@
       "source": "/datenschutz",
       "destination": "/privacy",
       "permanent": true
-    },
-    {
-      "source": "/m/:path*",
-      "destination": "/:path*",
-      "permanent": false,
-      "missing": [
-        {
-          "type": "header",
-          "key": "user-agent",
-          "value": ".*(iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry|BB10|Opera Mini|Mobile Safari|IEMobile|webOS).*"
-        }
-      ]
     }
   ],
   "headers": [
