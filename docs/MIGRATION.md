@@ -71,7 +71,7 @@ Independence from Wix: with every non-local request blocked, **no page requested
 - **Privacy policy added** at `/privacy` (`/datenschutz` redirects), linked with the Impressum from a line under the footer of every page. The Wix site had none. It is based on the v4 draft, adapted to v3, and shows a "Draft: awaiting legal review" notice until the open points below are confirmed.
 - No cookie banner appeared on the Wix site in any capture; with Wix's tracking removed and YouTube behind a click, no consent banner is needed.
 
-### Privacy policy: open points for Stas (marked `CONFIRM` in `public/privacy.html`)
+### Privacy policy (accepted by Stas on 2026-11-25 without a separate legal review; draft notice removed)
 
 Verified from the providers' own pages: Vercel is certified under the EU-U.S. Data Privacy Framework; Vercel keeps function runtime logs about one hour on Hobby; Resend keeps emails and logs 30 days on its free plan, stores data in the USA, and covers transfers with the DPF and Standard Contractual Clauses; YouTube's privacy-enhanced mode is provided by Google Ireland.
 
