@@ -26,7 +26,7 @@ CAP, OUT, VIDEOS = sys.argv[1], sys.argv[2], sys.argv[3]
 ORIGIN = 'https://www.lynxware.org'
 UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
 LOCALIZE_HOSTS = ('static.wixstatic.com', 'static.parastorage.com', 'video.wixstatic.com',
-                  'www-lynxware-org.filesusr.com')
+                  'www-lynxware-org.filesusr.com', 'i.creativecommons.org')
 # Monotype/Linotype faces Wix serves under its own licence are not ours to self-host: their
 # @font-face rules are dropped, and public/site.css maps the same family names to free substitutes.
 LICENSED_FONT = re.compile(r'helvetica|avenir|futura|din-next|proxima|brandon|museo|wfont', re.I)
@@ -67,6 +67,8 @@ def localize(url, base=None):
     ctype = ctype.split(';')[0].strip()
     path = urllib.parse.urlparse(raw).path
     ext = EXT_BY_TYPE.get(ctype) or (os.path.splitext(path)[1][:6] or '.bin')
+    if ext == '.html':  # the DIY licence embed: serve its badge image locally too
+        data = re.sub(r'src="([^"]+)"', lambda m: f'src="{localize(m.group(1))}"', data.decode('utf-8', 'replace')).encode()
     if ext == '.css' or ctype == 'text/css':
         data = process_css(data.decode('utf-8', 'replace'), raw).encode()
     name = hashlib.sha1(raw.encode()).hexdigest()[:16] + ext
@@ -141,6 +143,10 @@ IMPRESSUM_ALT = ('Stanislaw Kirpicnikow, Menninghauser Str. 29, 42859 Remscheid,
                  'Email: s.kirpicnikow@gmx.de. Artist: ApeDevil.')
 
 
+LEGAL_LINE = ('<nav class="lx-legal" aria-label="Legal"><a href="/impressum">Impressum</a>'
+              '<span aria-hidden="true"> · </span><a href="/privacy">Privacy / Datenschutz</a></nav>')
+
+
 def override_content(h):
     return re.sub(r'<img\b[^>]*id="img_comp-lihrgu2l"[^>]*>',
                   lambda m: re.sub(r'\s(?:srcset|sizes|fetchpriority)="[^"]*"', '', m.group(0))
@@ -169,6 +175,7 @@ def convert(src_html, mode):
     h = re.sub(r'(<link\b[^>]*rel="canonical"[^>]*href=")/', lambda m: m.group(1) + ORIGIN + '/', h)
     h = h.replace('</head>', '<link rel="stylesheet" href="/site.css"><script src="/site.js" defer></script></head>', 1)
     h = re.sub(r'<html\b', f'<html data-lx-view="{mode}"', h, count=1)
+    h = h.replace('</body>', LEGAL_LINE + '</body>', 1)
     return h
 
 

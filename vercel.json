@@ -37,6 +37,11 @@
       "permanent": true
     },
     {
+      "source": "/datenschutz",
+      "destination": "/privacy",
+      "permanent": true
+    },
+    {
       "source": "/m/:path*",
       "destination": "/:path*",
       "permanent": false,

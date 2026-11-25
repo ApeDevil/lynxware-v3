@@ -47,7 +47,7 @@ Functional tests (`tools/test_functional.cjs`), all **PASS**: mobile/desktop rou
 
 Form handler tests (`tests/form.test.mjs`, Resend mocked), all **PASS** (6/6): delivery with Reply-To and HTML escaping; honeypot and too-fast submits silently dropped; invalid email/unknown form/bad URL/too many fields rejected; foreign origin and non-POST refused; missing configuration answers 503; rate limit after 5 submits.
 
-Independence from Wix: with every non-local request blocked, **no page requested anything from Wix** (no `wixstatic`, `parastorage`, `wix.com`, Sentry or analytics) and no resource failed. The only external request left is the Creative Commons badge image inside the DIY page's licence notice (`i.creativecommons.org`), as on Wix.
+Independence from Wix: with every non-local request blocked, **no page requested anything external** (no `wixstatic`, `parastorage`, `wix.com`, Sentry, analytics or fonts; the Creative Commons badge of the DIY licence notice is served locally) and no resource failed. Every page is 53 px taller for the legal line under the footer.
 
 ## 4. Remaining discrepancies and limitations
 
@@ -55,15 +55,26 @@ Independence from Wix: with every non-local request blocked, **no page requested
 - Fonts differ slightly for visitors without Helvetica/Avenir/Futura installed (see above). Apple devices have Helvetica and Avenir, so they see the original faces.
 - The Wix entrance animations are not reproduced; the pages show their final state immediately.
 - No reCAPTCHA (replaced by server-side spam protection).
-- **There is no privacy policy (Datenschutzerklärung) on the original site**, though it has three contact forms and YouTube videos. That gap is pre-existing; it should be added (by you or a generator such as e-recht24) before or soon after the switch. I did not write legal text.
+- **Privacy policy added** at `/privacy` (`/datenschutz` redirects), linked with the Impressum from a line under the footer of every page. The Wix site had none. It is based on the v4 draft, adapted to v3, and shows a "Draft: awaiting legal review" notice until the open points below are confirmed.
 - No cookie banner appeared on the Wix site in any capture; with Wix's tracking removed and YouTube behind a click, no consent banner is needed.
+
+### Privacy policy: open points for Stas (marked `CONFIRM` in `public/privacy.html`)
+
+Verified from the providers' own pages: Vercel is certified under the EU-U.S. Data Privacy Framework; Vercel keeps function runtime logs about one hour on Hobby; Resend keeps emails and logs 30 days on its free plan, stores data in the USA, and covers transfers with the DPF and Standard Contractual Clauses; YouTube's privacy-enhanced mode is provided by Google Ireland.
+
+1. Data processing agreement with Vercel (Art. 28 GDPR): Vercel's DPA is offered for Pro/Enterprise; confirm what applies on Hobby, and accept the DPA after the Pro upgrade. Vercel's infrastructure request-log retention is not published for Hobby.
+2. Accept Resend's DPA for the account used (resend.com/legal/dpa).
+3. Which mailbox receives the form emails (`FORM_TO`) and its provider (e.g. Gmail = Google), and how long form emails are kept there.
+4. Supervisory authority: LDI NRW, derived from the Remscheid address.
+5. Legal review of the whole text, then remove the draft notice.
+6. The footer still links "LYNXware Merchandise" (lynxware.shop); check that the shop still exists now that the company is gone.
 
 ## 5. Recurring costs
 
 | Item | Before | After |
 |---|---|---|
 | Wix Premium plan | yes | **cancelled after cutover** |
-| Vercel | existing team (Hobby) | Pro, $20/month per member, upgraded once Wix is cancelled (decided by Stas) |
+| Vercel | existing team (Hobby; LYNXware is a personal, non-commercial project) | Pro, $20/month per member, upgraded once Wix is cancelled (decided by Stas) |
 | Resend | existing account | $0 (free tier: 3,000 emails/month) |
 | Domain (Namecheap) | annual renewal | unchanged |
 | GitHub | private repo | $0 |

@@ -17,6 +17,7 @@ cfg = {
     ],
     'redirects': [
         {'source': '/index', 'destination': '/', 'permanent': True},
+        {'source': '/datenschutz', 'destination': '/privacy', 'permanent': True},
         {'source': '/m/:path*', 'destination': '/:path*', 'permanent': False, 'missing': has},
     ],
     'headers': [
@@ -40,7 +41,7 @@ for u in open(os.path.join(ROOT, 'tools/downloads.txt')):
 json.dump(cfg, open(os.path.join(ROOT, 'vercel.json'), 'w'), indent=2)
 with open(os.path.join(ROOT, 'public/sitemap.xml'), 'w') as f:
     f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
-    for s in [''] + slugs:
+    for s in [''] + slugs + ['privacy']:
         f.write(f'<url><loc>https://www.lynxware.org/{s}</loc></url>\n'.replace('.org/<', '.org<') if not s else f'<url><loc>https://www.lynxware.org/{s}</loc></url>\n')
     f.write('</urlset>\n')
 open(os.path.join(ROOT, 'public/robots.txt'), 'w').write('User-agent: *\nAllow: /\nDisallow: /m/\n\nSitemap: https://www.lynxware.org/sitemap.xml\n')
