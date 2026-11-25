@@ -1,6 +1,6 @@
 # LYNXware v3: Wix → Vercel migration report
 
-Status: **site rebuilt and validated locally; waiting for the Vercel project import (one dashboard step) before the preview URL exists.** Wix and DNS are untouched.
+Status: **deployed on Vercel Hobby at https://lynxware-v3.vercel.app and validated live.** Form delivery waits for the Resend variables; Wix and DNS are untouched.
 
 ## 1. Infrastructure found
 
@@ -48,6 +48,13 @@ Functional tests (`tools/test_functional.cjs`), all **PASS**: mobile/desktop rou
 Form handler tests (`tests/form.test.mjs`, Resend mocked), all **PASS** (6/6): delivery with Reply-To and HTML escaping; honeypot and too-fast submits silently dropped; invalid email/unknown form/bad URL/too many fields rejected; foreign origin and non-POST refused; missing configuration answers 503; rate limit after 5 submits.
 
 Independence from Wix: with every non-local request blocked, **no page requested anything external** (no `wixstatic`, `parastorage`, `wix.com`, Sentry, analytics or fonts; the Creative Commons badge of the DIY licence notice is served locally) and no resource failed. Every page is 53 px taller for the legal line under the footer.
+
+### Live deployment (https://lynxware-v3.vercel.app, commit 5f3598f)
+
+- Phones get the mobile layout and everything else the desktop layout, on every page (desktop pages live in `public/d`, because Vercel serves a matching file before it evaluates rewrites).
+- The same browser checks pass live: menu, click-to-load videos, all three forms (posting intercepted), required fields, 404. All 25 internal links answer 2xx/3xx; all 11 downloads are byte-identical to Wix (SHA-256) with their original file names.
+- No external requests, console errors or failed resources on any page; the visual diff equals the local build.
+- `/api/form` answers "Form delivery is not configured yet" until `RESEND_API_KEY`, `FORM_FROM` and `FORM_TO` are set.
 
 ## 4. Remaining discrepancies and limitations
 
